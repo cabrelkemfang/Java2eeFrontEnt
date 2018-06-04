@@ -1,0 +1,86 @@
+
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <div class="example-container" >
+      Level  {{level}}
+      <mat-form-field>
+        <mat-select placeholder="Select an Option" #option>
+          <mat-option value="computer" *ngIf="option1">Computer Engineering</mat-option>
+          <mat-option value="sotfware" *ngIf="lev">Sotfware  Engineering</mat-option>
+          <mat-option value="network"  *ngIf="lev">Network Engineering</mat-option>
+          <mat-option value="electrical" *ngIf="option1" >Electrical Engineering</mat-option>
+          <mat-option value="power" *ngIf="lev">Power Engineering</mat-option>
+          <mat-option value="telecommunication" *ngIf="lev">Telecommunication Engineering</mat-option>
+          <mat-option value="all">All</mat-option>
+         
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Select a Semester" #semester >
+          <mat-option value="1">Semester 1</mat-option>
+          <mat-option value="2">Semester 2</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button class="but" (click)="function(option.value,semester.value)">
+        Action
+      </button>
+
+    </div>
+
+
+  </mat-card-header>
+
+  <mat-card-content>
+    <table mat-table [dataSource]="ELEMENT_DATA" class="mat-elevation-z8" class="table0">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> S/N </th>
+        <td mat-cell *matCellDef="let element" (click)="open(element)" > {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="course_code">
+        <th mat-header-cell *matHeaderCellDef> Course Code </th>
+        <td mat-cell *matCellDef="let element" (click)="open(element)"> {{element.course_code}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="course_title">
+        <th mat-header-cell *matHeaderCellDef> Course Title </th>
+        <td mat-cell *matCellDef="let element" (click)="open(element)"> {{element.course_title}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="course_value">
+        <th mat-header-cell *matHeaderCellDef> Course Value </th>
+        <td mat-cell *matCellDef="let element" (click)="open(element)"> {{element.course_value}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="course_status">
+        <th mat-header-cell *matHeaderCellDef> Course Status </th>
+        <td mat-cell *matCellDef="let element" (click)="open(element)"> {{element.course_status}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="course_master">
+        <th mat-header-cell *matHeaderCellDef> Course Master </th>
+        <td mat-cell *matCellDef="let element" (click)="open(element)"> {{element.course_master}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+    </table>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="accent" (click)='printpdf()' >Download</button>
+
+  </mat-card-actions>
+</mat-card>

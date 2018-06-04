@@ -1,0 +1,117 @@
+<div class="nav">
+  <mat-drawer-container class="example-container " autosize>
+    <mat-drawer #drawer class="example-sidenav mat-elevation-z20" mode="side" opened>
+
+      <form  class="card">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Course code" name="course_code" required #course_code>
+          <mat-error>
+            Please the Course code is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Course Title" name="course_title" required #course_title>
+          <mat-error>
+            Please the Course Title is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="Course Value" name="course_value" required #course_value>
+          <mat-error>
+            Please the Course Value is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Course Status" name="course_status" required #course_status>
+          <mat-error>
+            Please the Course Status is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="course_master" name="course_master" required #course_master>
+          <mat-error>
+            Please the Course Master is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="Semester" name="semester" required #semester>
+          <mat-error>
+            Please the Semester is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Select an Option" required #option>
+            <mat-option value="computer" *ngIf="option">Computer Engineering</mat-option>
+            <mat-option value="sotfware" *ngIf="lev">Sotfware Engineering</mat-option>
+            <mat-option value="network" *ngIf="lev">Network Engineering</mat-option>
+            <mat-option value="electrical" *ngIf="option">Electrical Engineering</mat-option>
+            <mat-option value="power" *ngIf="lev">Power Engineering</mat-option>
+            <mat-option value="telecommunication" *ngIf="lev">Telecommunication Engineering</mat-option>
+            <mat-option value="all">All</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+      </form>
+
+    </mat-drawer>
+    <div class="example-sidenav-content">
+      <mat-toolbar class="tool">Course Outline</mat-toolbar>
+
+      <mat-toolbar class="">
+        <form #add="ngForm" (ngSubmit)="onSubmit(add.value)" class="card">
+          <table class="tab">
+            <tr>
+              <th>
+                <mat-form-field>
+                  <input matInput type="number" placeholder="Chapter Number" name="chapter" required ngModel>
+                  <mat-error>
+                    Please the Chapter Number is required
+                  </mat-error>
+                </mat-form-field>
+              </th>
+              <th class="chap">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Chapter Content" name="content" required ngModel>
+                  <mat-error>
+                    Please the Chapter Content is required
+                  </mat-error>
+                </mat-form-field>
+              </th>
+              <th>
+                <button mat-raised-button color="accent" type="submit" [disabled]="!add.form.valid">
+                  Add
+                </button>
+              </th>
+            </tr>
+          </table>
+        </form>
+      </mat-toolbar>
+
+      <mat-card>
+        <table border="0" >
+          <tr >
+            <td >Chapter number</td>
+            <td class="chap" >Lesson</td>
+            <td></td>
+          </tr>
+          <br>
+          <tr *ngFor="let lst of contents">
+            <td>{{lst.chapter}}</td>
+            <td class="tab1">{{lst.content}}</td>
+            <td> <button mat-raised-button color="warn" (click)='delete(element)'>Delete</button></td>
+          </tr>
+        </table>
+      </mat-card>
+
+
+    </div>
+    <button mat-raised-button color="accent" (click)="save(course_code.value, course_master.value, course_status.value, course_title.value, course_value.value, semester.value, option.value)" class="but1" type="submit">Save</button>
+  </mat-drawer-container>
+</div>

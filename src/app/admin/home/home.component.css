@@ -1,0 +1,25 @@
+.example-card {
+    max-width: 60%;
+    text-align: center;
+    justify-content: center;
+  align-items: center;
+  margin: auto;
+  }
+  
+  .example-header-image {
+    background-image: url('/assets/image/buku-pelangi.jpg');
+    background-size: cover;
+   
+   height: 350px;
+  }
+
+  .but{
+    background-color: #8BC2D1; 
+    margin-left: 10px;
+  }
+  .h{
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #148F77;
+    
+  }

@@ -1,0 +1,67 @@
+<div class="nav">
+  <mat-drawer-container class="example-container " autosize>
+    <mat-drawer #drawer class="example-sidenav mat-elevation-z20" mode="side" opened>
+
+      <mat-list>
+        <mat-list-item>Level : {{ course.level}} </mat-list-item>
+
+        <mat-list-item>Course Code : {{ course.course_code}}</mat-list-item>
+
+        <mat-list-item>Course Title : {{ course.course_title}}</mat-list-item>
+
+        <mat-list-item>Credit Value : {{ course.course_value}}</mat-list-item>
+
+        <mat-list-item>Course Status : {{ course.course_status}}</mat-list-item>
+
+        <mat-list-item>Course Institutor : {{ course.course_master}}</mat-list-item>
+
+        <mat-list-item>Semester : {{ course .semester}}</mat-list-item>
+
+        <mat-list-item>Option : {{ course .option}}</mat-list-item>
+
+        <mat-list-item>
+          <button mat-raised-button color="accent" (click)='printpdf()'>Download</button>
+        </mat-list-item>
+        
+  
+      </mat-list>
+
+
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <mat-toolbar>Course Outline</mat-toolbar>
+
+      <table mat-table [dataSource]="course.contents" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="chapter">
+          <th mat-header-cell *matHeaderCellDef> Chapter Number. </th>
+          <td mat-cell *matCellDef="let element"> {{element.chapter}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="content">
+          <th mat-header-cell *matHeaderCellDef> Lesson </th>
+          <td mat-cell *matCellDef="let element"> {{element.content}} </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+
+    </div>
+
+
+
+
+
+  </mat-drawer-container>
+
+
+</div>

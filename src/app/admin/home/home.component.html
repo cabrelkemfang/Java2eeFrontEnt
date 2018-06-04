@@ -1,0 +1,28 @@
+<mat-card class="example-card">
+    <mat-card-header>
+    </mat-card-header>
+    <div mat-card-image class="example-header-image">
+  
+    </div>
+  
+    <mat-card-content>
+  
+      <div class="h">Welcome &nbsp; <u>{{admin}}</u></div>
+      <mat-form-field>
+  
+        <mat-select placeholder="Select a Level" #level>
+  
+          <mat-option value="200"> 200</mat-option>
+          <mat-option value="300"> 300</mat-option>
+          <mat-option value="400"> 400</mat-option>
+          <mat-option value="500"> 500</mat-option>
+        </mat-select>
+  
+      </mat-form-field>
+  
+      <button mat-raised-button class="but" (click)="unclick(level.value)">Ok</button>
+     
+  
+  
+    </mat-card-content>
+  </mat-card>

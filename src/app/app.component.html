@@ -1,0 +1,25 @@
+<mat-toolbar class="tool">
+    <span>FET Course Manager</span>
+
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+
+
+    <span>
+        <button mat-raised-button class="but1" (click)="home()" *ngIf="isAdmin">
+            Home
+        </button>
+    </span>
+    <span>
+        <button mat-raised-button class="but2" (click)="login()" *ngIf="isAdmin">
+            Login
+        </button>
+    </span>
+    <span>
+        <button mat-raised-button class="but3" (click)="logout()" *ngIf="isLogin">
+            Logout
+        </button>
+    </span>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
