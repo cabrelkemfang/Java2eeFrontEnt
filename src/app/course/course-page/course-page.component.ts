@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceService } from '../../service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Course } from '../../course';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 
 @Component({
@@ -16,9 +17,12 @@ export class CoursePageComponent implements OnInit {
   option1: Boolean;
   lev: Boolean;
 
-  constructor(private _service: ServiceService, private _router: Router) { }
 
+  constructor(private _service: ServiceService, private _router: Router) { }
+  @ViewChild(MatSort) sort: MatSort;
+  
   ngOnInit() {
+
     this.level = parseInt(localStorage.getItem('level'));
     if ((this.level == 400) || (this.level == 500)) {
       this.lev = true;
@@ -69,7 +73,15 @@ export class CoursePageComponent implements OnInit {
   }
 
   printpdf() {
-    window.open("http://localhost:8082/api/pdfreport/");
+   
+    this._service.pdfReport(this.ELEMENT_DATA).subscribe((data) => {
+      var file = new Blob([data], { type: 'application/pdf' });            
+        var fileURL = URL.createObjectURL(file);
+        window.open(fileURL);
+    }, (error) => {
+      console.log(error);
+    })
+
   }
 }
 

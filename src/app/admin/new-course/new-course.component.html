@@ -2,51 +2,51 @@
   <mat-drawer-container class="example-container " autosize>
     <mat-drawer #drawer class="example-sidenav mat-elevation-z20" mode="side" opened>
 
-      <form  class="card">
+      <form  #form="ngForm" (ngSubmit)="onSubmit(form.value)" class="card">
         <mat-form-field>
-          <input matInput type="text" placeholder="Course code" name="course_code" required #course_code>
+          <input matInput type="text" placeholder="Course code" name="course_code"  [(ngModel)]="course1.course_code" required >
           <mat-error>
             Please the Course code is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Course Title" name="course_title" required #course_title>
+          <input matInput type="text" placeholder="Course Title" name="course_title" required [(ngModel)]="course1.course_title">
           <mat-error>
             Please the Course Title is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="number" placeholder="Course Value" name="course_value" required #course_value>
+          <input matInput type="number" placeholder="Course Value" name="course_value" required [(ngModel)]="course1.course_value">
           <mat-error>
             Please the Course Value is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Course Status" name="course_status" required #course_status>
+          <input matInput type="text" placeholder="Course Status" name="course_status" required [(ngModel)]="course1.course_status">
           <mat-error>
             Please the Course Status is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="text" placeholder="course_master" name="course_master" required #course_master>
+          <input matInput type="text" placeholder="course_master" name="course_master" required [(ngModel)]="course1.course_master">
           <mat-error>
             Please the Course Master is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput type="number" placeholder="Semester" name="semester" required #semester>
+          <input matInput type="number" placeholder="Semester" name="semester" required [(ngModel)]="course1.semester" min="1" max="2">
           <mat-error>
             Please the Semester is required
           </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Select an Option" required #option>
+          <mat-select placeholder="Select an Option" required [(ngModel)]="course1.option" [ngModelOptions]="{standalone: true}">
             <mat-option value="computer" *ngIf="option">Computer Engineering</mat-option>
             <mat-option value="sotfware" *ngIf="lev">Sotfware Engineering</mat-option>
             <mat-option value="network" *ngIf="lev">Network Engineering</mat-option>
@@ -70,18 +70,14 @@
             <tr>
               <th>
                 <mat-form-field>
-                  <input matInput type="number" placeholder="Chapter Number" name="chapter" required ngModel>
-                  <mat-error>
-                    Please the Chapter Number is required
-                  </mat-error>
+                  <input matInput type="number" placeholder="Chapter Number" name="chapter_number" required  [(ngModel)]=chapter_number >
+                  
                 </mat-form-field>
               </th>
               <th class="chap">
                 <mat-form-field class="example-full-width">
-                  <input matInput placeholder="Chapter Content" name="content" required ngModel>
-                  <mat-error>
-                    Please the Chapter Content is required
-                  </mat-error>
+                  <input matInput placeholder="Chapter Content" name="content" required [(ngModel)]=content>
+                  
                 </mat-form-field>
               </th>
               <th>
@@ -103,15 +99,15 @@
           </tr>
           <br>
           <tr *ngFor="let lst of contents">
-            <td>{{lst.chapter}}</td>
+            <td>{{lst.chapter_number}}</td>
             <td class="tab1">{{lst.content}}</td>
-            <td> <button mat-raised-button color="warn" (click)='delete(element)'>Delete</button></td>
+            <td> <button mat-raised-button color="warn" (click)='delete(lst)'>Delete</button></td>
           </tr>
         </table>
       </mat-card>
 
 
     </div>
-    <button mat-raised-button color="accent" (click)="save(course_code.value, course_master.value, course_status.value, course_title.value, course_value.value, semester.value, option.value)" class="but1" type="submit">Save</button>
+    <button mat-raised-button color="accent" (click)="save()" class="but1" type="submit">Save</button>
   </mat-drawer-container>
 </div>

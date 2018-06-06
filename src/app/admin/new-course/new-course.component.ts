@@ -3,8 +3,7 @@ import { Course } from '../../course';
 import { Contents } from '../../contents';
 import { forEach } from '@angular/router/src/utils/collection';
 import { ServiceService } from '../../service.service';
-
-import { parse } from 'path';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-course',
@@ -15,11 +14,13 @@ export class NewCourseComponent implements OnInit {
   private level;
   private lev;
   private option;
-  private contents: object[] = [];
-  public course1:Course;
+  public contents: object[] = [];
+  public course1: Course = new Course();
+  content: string;
+  chapter_number: number;
 
-  
-  constructor(private _service: ServiceService) { }
+
+  constructor(private _service: ServiceService, private _router: Router) { }
 
   ngOnInit() {
     this.level = parseInt(localStorage.getItem('level'));
@@ -35,41 +36,52 @@ export class NewCourseComponent implements OnInit {
   displayedColumns = ['chapter', 'content', 'but1'];
 
   onSubmit(value) {
-    this.contents.push(value);
-    console.log(this.contents);
+    if ((value.chapter_number == null) && (value.content == undefined)) {
+      this.chapter_number = null;
+      this.content = '';
+    }
+    else {
+      this.contents.push(value);
+      console.log(this.contents);
+      this.chapter_number = null;
+      this.content = '';
+    }
   }
 
 
   delete(value) {
+    console.log(value);
+    console.log(this.contents.indexOf(value));
+
     this.contents.splice(this.contents.indexOf(value), 1);
   }
 
 
-  save(value1,value2,value3,value4,value5,value6,value7) {
-    // this.contents.forEach(function (value) {
-    //  // console.log(value);
+  save() {
+    this.contents.forEach(function (value) {
+      console.log(value)
+      this.course1.content.push(value);
 
-    // });
-    
+    });
 
     let level1 = parseInt(localStorage.getItem('level'));
-    this.course1.course_code=value1;
-    this.course1.course_master=value2;
-  
-
-    //this.course1.content.push({ chapter_number: 5, content: "bkn,n" });
+    this.course1.level = level1;
+    // this.course1.content.push(
+    //   {chapter_number: 12, content: "b,nb,nb"});
     console.log(this.course1);
-    console.log(value1,value2,value3,value4,value5,value6,value7)
- 
-  
+    if (this.course1.semester < 3) {
+      this._service.saveCourse(this.course1).subscribe((data) => {
 
-    // this._service.saveCourse(this.course1).subscribe((data) => {
+        console.log(data);
+      }, (error) => {
+        console.log(error);
+      })
+      this._router.navigate(["/course_manager"])
 
-    //   console.log(data);
-    // }, (error) => {
-    //   console.log(error);
-    // })
-
+    }else{
+      
+    }
   }
+
 
 }

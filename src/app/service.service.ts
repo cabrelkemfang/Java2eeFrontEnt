@@ -1,9 +1,10 @@
 
 
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Course } from './course';
+import { Observable } from 'rxjs';
 //import 'rxjs/add/operator/map';
 //import { HttpHeaders } from '@angular/common/http';
 
@@ -61,9 +62,10 @@ export class ServiceService {
     return this.course;
   }
 
-  pdfReport() {
-    return this._http.get('http://localhost:8082/api/pdfreport', this.options)
-      .pipe(map(res => res.json()) // or any other operator
+  pdfReport(courses):Observable<Blob> {
+    let options = new RequestOptions({responseType: ResponseContentType.Blob});
+    return this._http.post('http://localhost:4200/api/pdfreport',JSON.stringify(courses),options)
+      .pipe(map((response: Response) => <Blob>response.blob()) // or any other operator
       );
   }
 

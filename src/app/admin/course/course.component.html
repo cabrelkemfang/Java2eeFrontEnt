@@ -46,14 +46,14 @@
 
       </tr>
       <br>
-      <tr *ngFor="let lst of ELEMENT_DATA">
-        <td> </td>
+      <tr *ngFor="let lst of ELEMENT_DATA;let i=index">
+        <td> {{i+1}}</td>
         <td> {{lst.course_code}} </td>
         <td> {{lst.course_title}} </td>
         <td> {{lst.course_value}} </td>
         <td> {{lst.course_status}} </td>
         <td> {{lst.course_master}} </td>
-        <td >
+        <td>
           <button mat-raised-button color="warn" (click)='delete(lst)'>Delete</button>
         </td>
       </tr>
@@ -62,7 +62,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="accent" (click)='add()'>Add</button>
-    
+
 
   </mat-card-actions>
 
