@@ -14,10 +14,11 @@ export class NewCourseComponent implements OnInit {
   private level;
   private lev;
   private option;
-  public contents: object[] = [];
+  public contents: Contents[] = [];
   public course1: Course = new Course();
   content: string;
-  chapter_number: number;
+  chapter: number;
+  private pro1;
 
 
   constructor(private _service: ServiceService, private _router: Router) { }
@@ -36,14 +37,14 @@ export class NewCourseComponent implements OnInit {
   displayedColumns = ['chapter', 'content', 'but1'];
 
   onSubmit(value) {
-    if ((value.chapter_number == null) && (value.content == undefined)) {
-      this.chapter_number = null;
+    if ((value.chapter == null) && (value.content == undefined)) {
+      this.chapter = null;
       this.content = '';
     }
     else {
       this.contents.push(value);
       console.log(this.contents);
-      this.chapter_number = null;
+      this.chapter = null;
       this.content = '';
     }
   }
@@ -58,28 +59,34 @@ export class NewCourseComponent implements OnInit {
 
 
   save() {
-    this.contents.forEach(function (value) {
-      console.log(value)
-      this.course1.content.push(value);
-
-    });
-
+    
     let level1 = parseInt(localStorage.getItem('level'));
     this.course1.level = level1;
-    // this.course1.content.push(
-    //   {chapter_number: 12, content: "b,nb,nb"});
+
+    for (var i = 0; i < this.contents.length; i++) {
+      this.course1.contents[i] = this.contents[i];
+    }
+   
     console.log(this.course1);
     if (this.course1.semester < 3) {
+      this.pro1=true;
       this._service.saveCourse(this.course1).subscribe((data) => {
 
         console.log(data);
       }, (error) => {
         console.log(error);
       })
-      this._router.navigate(["/course_manager"])
+      setTimeout(() => 
+      {
+        this.pro1=false;
+        this._router.navigate(["/course_manager"])
+      },
+      3000);
 
-    }else{
       
+
+    } else {
+
     }
   }
 

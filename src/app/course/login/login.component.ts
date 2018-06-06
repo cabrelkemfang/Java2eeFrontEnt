@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('isAdmin', '0');
     localStorage.setItem('isLogin', '1');
     localStorage.removeItem("level"),
-    //window.location.reload();
+    window.location.reload();
    // this.location.reload();
 
     console.log(value.userName);

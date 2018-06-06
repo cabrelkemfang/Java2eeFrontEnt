@@ -1,4 +1,4 @@
 export class Contents {
-    chapter_number:number;
+    chapter:number;
     content: String;
 }

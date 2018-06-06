@@ -27,7 +27,7 @@
   table {
     width: 100%;
   }
-  .table0 tr:hover{
+  table tr:hover{
     background-color: #8BC2D1
   }
   .but{

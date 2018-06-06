@@ -9,5 +9,5 @@ export class Course {
     course_status: string;
     option: string;
     course_master: string;
-    content:any[]=[];
+    contents:any[]=[];
 }
