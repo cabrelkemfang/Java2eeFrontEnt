@@ -70,7 +70,7 @@
             <tr>
               <th>
                 <mat-form-field>
-                  <input matInput type="number" placeholder="Chapter Number" name="chapter_number" required  [(ngModel)]=chapter_number >
+                  <input matInput type="number" placeholder="Chapter Number" name="chapter" required  [(ngModel)]=chapter >
                   
                 </mat-form-field>
               </th>
@@ -99,7 +99,7 @@
           </tr>
           <br>
           <tr *ngFor="let lst of contents">
-            <td>{{lst.chapter_number}}</td>
+            <td>{{lst.chapter}}</td>
             <td class="tab1">{{lst.content}}</td>
             <td> <button mat-raised-button color="warn" (click)='delete(lst)'>Delete</button></td>
           </tr>
@@ -109,5 +109,7 @@
 
     </div>
     <button mat-raised-button color="accent" (click)="save()" class="but1" type="submit">Save</button>
+    <mat-spinner [diameter]="30" [strokeWidth]="4" *ngIf="pro1" class="but1"></mat-spinner>
+    
   </mat-drawer-container>
 </div>

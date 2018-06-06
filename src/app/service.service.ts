@@ -63,9 +63,23 @@ export class ServiceService {
   }
 
   pdfReport(courses):Observable<Blob> {
-    let options = new RequestOptions({responseType: ResponseContentType.Blob});
+    //let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+    //cpHeaders.append({responseType: ResponseContentType.Blob});
+   //let options = new RequestOptions({ headers: this.cpHeaders });
+    //let options = new RequestOptions({responseType: ResponseContentType.Blob});
+
+    let headers = new Headers({ 
+      'Content-Type': 'application/json', 
+      'Accept':'application/pdf'
+   });
+   
+   
+   let options = new RequestOptions({ headers: headers });
+   // Ensure you set the responseType to Blob.
+   options.responseType = ResponseContentType.Blob;
+
     return this._http.post('http://localhost:4200/api/pdfreport',JSON.stringify(courses),options)
-      .pipe(map((response: Response) => <Blob>response.blob()) // or any other operator
+      .pipe(map((response: Response) => new Blob( [response.blob()], { type: "application/pdf"} )) // or any other operator
       );
   }
 

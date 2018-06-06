@@ -3,6 +3,7 @@ import { ServiceService } from '../../service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Course } from '../../course';
 import { MatSort, MatTableDataSource } from '@angular/material';
+import * as FileSaver from 'file-saver';
 
 
 @Component({
@@ -18,9 +19,9 @@ export class CoursePageComponent implements OnInit {
   lev: Boolean;
 
 
-  constructor(private _service: ServiceService, private _router: Router) { }
+  constructor(private _service: ServiceService, private _router: Router, ) { }
   @ViewChild(MatSort) sort: MatSort;
-  
+
   ngOnInit() {
 
     this.level = parseInt(localStorage.getItem('level'));
@@ -73,14 +74,13 @@ export class CoursePageComponent implements OnInit {
   }
 
   printpdf() {
-   
-    this._service.pdfReport(this.ELEMENT_DATA).subscribe((data) => {
-      var file = new Blob([data], { type: 'application/pdf' });            
-        var fileURL = URL.createObjectURL(file);
-        window.open(fileURL);
-    }, (error) => {
-      console.log(error);
-    })
+
+    this._service.pdfReport(this.ELEMENT_DATA).subscribe(blob => {
+      var downloadUrl = URL.createObjectURL(blob);
+      window.open(downloadUrl);
+     }, (error) => {
+          console.log(error);
+        })
 
   }
 }
